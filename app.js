@@ -12,6 +12,7 @@ const render = require("./lib/htmlRenderer");
 const Employee = require("./lib/Employee");
 
 const team = [];
+const employeeID = [];
 
 const initialQuestion = [
   {
@@ -31,16 +32,45 @@ const manager = [
     type: "input",
     name: "id",
     message: "What is your employee ID?",
+    validate: function (value) {
+      var num = /^[0-9]*$/;
+      var pass = value.match(num) && !employeeID.includes(value);
+
+      if (pass) {
+        return true;
+      } else {
+        return "ID must be a number and cannot be an ID which has already been assigned";
+      }
+    },
   },
   {
     type: "input",
     name: "email",
     message: "What is your email?",
+    validate: function (value) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      var pass = value.match(re);
+      if (pass) {
+        return true;
+      } else {
+        return "Please enter a valid email";
+      }
+    },
   },
   {
     type: "input",
     message: "What is your office number?",
     name: "officeNumber",
+    validate: function (value) {
+      var num = /^[0-9]*$/;
+      var pass = value.match(num);
+
+      if (pass) {
+        return true;
+      } else {
+        return "ID must be a number";
+      }
+    },
   },
 ];
 
@@ -54,11 +84,30 @@ const engineer = [
     type: "input",
     name: "id",
     message: "What is the employee ID?",
+    validate: function (value) {
+      var num = /^[0-9]*$/;
+      var pass = value.match(num) && !employeeID.includes(value);
+
+      if (pass) {
+        return true;
+      } else {
+        return "ID must be a number and cannot be an ID which has already been assigned";
+      }
+    },
   },
   {
     type: "input",
     name: "email",
     message: "What is the employee email?",
+    validate: function (value) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      var pass = value.match(re);
+      if (pass) {
+        return true;
+      } else {
+        return "Please enter a valid email";
+      }
+    },
   },
   {
     type: "input",
@@ -77,11 +126,30 @@ const intern = [
     type: "input",
     name: "id",
     message: "What is the employee ID?",
+    validate: function (value) {
+      var num = /^[0-9]*$/;
+      var pass = value.match(num) && !employeeID.includes(value);
+
+      if (pass) {
+        return true;
+      } else {
+        return "ID must be a number and cannot be an ID which has already been assigned";
+      }
+    },
   },
   {
     type: "input",
     name: "email",
     message: "What is the employee email?",
+    validate: function (value) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      var pass = value.match(re);
+      if (pass) {
+        return true;
+      } else {
+        return "Please enter a valid email";
+      }
+    },
   },
   {
     type: "input",
@@ -101,7 +169,9 @@ function addEngineer() {
       response.email,
       response.github
     );
+
     team.push(engineer);
+    employeeID.push(response.id);
     addEmployee();
   });
 }
@@ -168,6 +238,7 @@ function addEmployee() {
       if (response.addEmployee) {
         getEmployeeInformation();
       } else {
+        writeToFile();
         console.log(team);
         return;
       }
@@ -180,7 +251,10 @@ getEmployeeInformation();
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
 
-const rendered = render(team);
+function writeToFile() {
+  const rendered = render(team);
+  fs.writeFileSync(outputPath, rendered, "UTF-8");
+}
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the

@@ -1,0 +1,19 @@
+.jumbotron {
+  background-color: #5c6e91;
+  color: white;
+}
+
+.card-title {
+  color: white;
+}
+.card-header {
+  background-color: #30475e;
+}
+.card {
+  margin: 1rem;
+  box-shadow: 5px 7px #686d76;
+}
+
+/* .card-body {
+  background-color: #bbbfca;
+} */
