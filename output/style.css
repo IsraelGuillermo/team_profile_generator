@@ -1,5 +1,5 @@
 .jumbotron {
-  background-color: #5c6e91;
+  background-color: #373a40;
   color: white;
 }
 
@@ -10,10 +10,6 @@
   background-color: #30475e;
 }
 .card {
-  margin: 1rem;
+  margin: 0.5rem;
   box-shadow: 5px 7px #686d76;
 }
-
-/* .card-body {
-  background-color: #bbbfca;
-} */

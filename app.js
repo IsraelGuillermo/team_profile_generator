@@ -184,6 +184,7 @@ function addManager() {
       response.email,
       response.officeNumber
     );
+    employeeID.push(response.id);
     team.push(manager);
     addEmployee();
   });
@@ -197,6 +198,7 @@ function addIntern() {
       response.email,
       response.school
     );
+    employeeID.push(response.id);
     team.push(intern);
     addEmployee();
   });
@@ -239,7 +241,7 @@ function addEmployee() {
         getEmployeeInformation();
       } else {
         writeToFile();
-        console.log(team);
+        console.log("Thank you, your team profile has been generated!");
         return;
       }
     });
